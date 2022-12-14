@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/58076750a2.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      .image {
+        width: 100vw;
+        height: 120vh;
+        object-fit: cover;
+      }
+      .timer {
+        position: absolute;
+        top: 50%;
+        left: 41%;
+        height: 120px;
+        width: 300px;
+        background-color: #fff;
+        border-radius: 10px;
+      }
+      .countdown {
+        height: 50px;
+        justify-content: center;
+        border-radius: 10px;
+        text-align: center;
+        padding: 17px 0px 17px 0px;
+        font-size: 50px;
+      }
+      .buttons {
+        width: 250px;
+        margin-top: 5px;
+        margin-left: 10px;
+      }
+      .startbutton {
+        margin-left: 110px;
+        cursor: pointer;
+      }
+      .pausebutton,
+      .restartbutton {
+        cursor: pointer;
+        margin-left: 10px;
+      }
+    </style>
+    <div class="main">
+      <img
+        src="./img/ralph-hutter-xLs4XSQmxtE-unsplash.jpg"
+        alt=""
+        class="image"
+      />
+      <div class="timer">
+        <!-- count-down timer -->
+        <div class="countdown">00:00:00</div>
+        <div class="buttons">
+          <!-- start button -->
+          <span class="startbutton"><i class="fa-solid fa-play"></i></span>
+          <!-- stop button -->
+          <span class="pausebutton"><i class="fa-solid fa-pause"></i></span>
+          <!-- restart button -->
+          <span class="restartbutton"><i class="fa-solid fa-repeat"></i></span>
+        </div>
+      </div>
+    </div>
+    <!-- js start here -->
+    <script>
+      // variable for time values
+      let second = "0";
+      let minutes = "0";
+      let hours = "0";
+      // variable for leading zero
+      let lendingSecond = 0;
+      let lendingMinutes = 0;
+      let lendingHours = 0;
+      // countdown box
+      let myInterval;
+      let countdown = document.querySelector(".countdown");
+      // startbutton
+      let startbutton = document
+        .querySelector(".startbutton")
+        .addEventListener("click", function () {
+          myInterval = window.setInterval(hello, 1000);
+        });
+      // pausebutton
+      let pausebutton = document
+        .querySelector(".pausebutton")
+        .addEventListener("click", function () {
+          window.clearInterval(myInterval);
+        });
+      // restartbutton
+      let restartbutton = document
+        .querySelector(".restartbutton")
+        .addEventListener("click", function () {
+          window.clearInterval(myInterval);
+          second = 0;
+          minutes = 0;
+          hours = 0;
+
+          countdown.innerHTML = "00:00:00";
+        });
+
+      function hello() {
+        second++;
+        if (second / 60 === 1) {
+          second = 00;
+          minutes++;
+          if (minutes / 60 === 1) {
+            minutes = 00;
+            hours++;
+          }
+        }
+        if (second < 10) {
+          lendingSecond = "0" + second.toString();
+        } else {
+          lendingSecond = second;
+        }
+        if (minutes < 10) {
+          lendingMinutes = "0" + minutes.toString();
+        } else {
+          lendingMinutes = minutes;
+        }
+        if (hours < 10) {
+          lendingHours = "0" + hours.toString();
+        } else {
+          lendingHours = hours;
+        }
+        countdown.innerText =
+          lendingHours + ":" + lendingHours + ":" + lendingSecond;
+      }
+    </script>
+  </body>
+</html>
